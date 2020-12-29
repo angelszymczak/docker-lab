@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  web:
+    # using a not local image, it will be downloaded
+    # image: nginx:latest
+    #
+    # using a local image
+    image: helloworld:latest
+    ports:
+      - "8080:80"
