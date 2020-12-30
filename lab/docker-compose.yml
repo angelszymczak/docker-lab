@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    build: app/
+    ports:
+      - "5000:5000"
+    env_file:
+      - db_variables.env
+      - web_variables.env
+
+  db:
+    image: "mariadb:latest"
+    env_file:
+      - db_variables.env
+
+    # We initialize the first time running of container placing dump files on docker intidb entrypoint
+    # https://hub.docker.com/_/mariadb -> Initializing a fresh instance
+    volumes:
+      - ./dump/:/docker-entrypoint-initdb.d:ro
+
